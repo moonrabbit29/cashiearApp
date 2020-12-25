@@ -1,0 +1,106 @@
+body {
+  padding-left: 10px;
+  padding-top: 5px;
+  background-color: rgb(17, 138, 101);
+  font-family: 'Gudea', sans-serif;
+  color: rgb(178, 235, 218);
+}
+
+#particles-js{
+  height: 100%;
+  background: rgb(17, 138, 101);
+
+}
+
+#content {
+  color: white;
+  padding-left: 5%;
+  margin-top: 30%;
+  text-shadow: 1px 1px 1px #90a4a1,
+    1px 1px 1px grey;
+  opacity: 0.9;
+}
+
+#form-container {
+  height: 400px;
+  margin-left: 5%;
+  margin-top: 6%;
+  padding: 10px;
+  width: 80%;
+  border-radius: 10px;
+
+}
+
+#form-title {
+
+  padding: auto;
+  margin-bottom: 30px;
+  color: rgb(245, 245, 245);
+  opacity: 0.9;
+}
+
+.form-title {
+  opacity: 1;
+  font-weight: 550;
+  font-size: 50px;
+
+  margin-bottom: 20px;
+  font-family: 'Cabin', sans-serif;
+}
+
+.form-control {
+  padding-left: 20px;
+  width: 300px;
+  outline: 0;
+  margin-left : 40px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-color: white;
+  background-color: rgb(17, 138, 101);
+  border-radius: 0;
+  color: white;
+  transition: 0.25s;
+}
+
+
+.form-control:focus {
+  outline: 0;
+  border: 0 0 2px;
+  border-color: white;
+  background-color: rgb(17, 138, 101);
+  border-radius: 0;
+  color: white;
+  box-shadow: none;
+}
+
+.form-control::placeholder {
+  color: rgb(165, 238, 216);
+}
+
+#judul {
+  margin-top: 2%;
+  margin-bottom: 50px;
+  text-align: center;
+  color: rgb(178, 235, 218);
+  opacity: 0.9;
+  text-shadow: rgb(6, 54, 40) 2px 2px;
+  font-size: 50px;
+  word-spacing: 5px;
+}
+
+.btn {
+  margin-top: 10px;
+
+  background-color: rgba(19, 97, 45, 0.781);
+  width: 100px;
+  color: white;
+  font-size: 18px;
+  border-radius: 0;
+  height: 40px;
+
+}
+
+.btn:hover {
+  color: rgb(146, 230, 197);
+}
