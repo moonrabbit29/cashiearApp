@@ -15,7 +15,7 @@
 
   </nav>
 
-  <form id="form-container" method="post">
+  <form id="form-container" method="post" action="login/validate">
     <div class="form-group">
       <div id="form-title">
         <h1 class="form-title"><?= $data['title']?></h1>
@@ -45,6 +45,6 @@
           </div>
         </div>
       </td>
-      <button type="submit" class="btn" name="login">{{button_text}}</button>
+      <button type="submit" class="btn" name="submit">{{button_text}}</button>
   </form>
 </div>
