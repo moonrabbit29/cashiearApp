@@ -22,11 +22,36 @@ class User_auth {
         $result = $this->db->single();
         if($result)
         {
-            echo "tes berhasil";
+            $_SESSION['status'] = 'login';
+            $_SESSION['staff_id'] = $result['Id'];
+            $_SESSION['nama'];
+            $id = $result['id'];
+            $this->db->query("SELECT * FROM manager WHERE Id ='$id' ");
+            if($this->db->single())
+            {
+                $_SESSION['priviledge'] = 'Manager';
+            }else
+            {
+                $_SESSION['priviledge'] = 'Cashier';
+            }
+            return 1;
         }
         else 
         {
             echo "failed";
+            return 0;
         }
+    }
+
+    function isLogin()
+    {
+        $var = isset($_SESSION['status']) ? true : false;
+        return $var;
+    }
+    
+    function isManager()
+    {
+        $var = ($_SESSION['priviledge'] =='Manager') ? true : false;
+        return $var;
     }
 }
