@@ -1,4 +1,5 @@
 var check = { "item1": "" };
+var total_payment = 0;
 
 function newRow(rowNumber) {
   var table = document.getElementById("myTable");
@@ -6,6 +7,7 @@ function newRow(rowNumber) {
   var index = table.rows.length - 1;
   var currentSelected = "item".concat((parseInt(Id)).toString());
   var productName = document.getElementById(currentSelected).value;
+
   showHint(productName, Id);
   if (check[currentSelected] == "") {
     check[currentSelected] = "1";
@@ -19,6 +21,7 @@ function newRow(rowNumber) {
     var cln2 = quantity.cloneNode(true);
     cln2.id = newID.concat("-Quantity");
     cln2.name = newID.concat("-Quantity");
+    cln2.removeAttribute("required");
     var cost = document.getElementById(rowNumber.id.concat("-Price"));
     var cln3 = cost.cloneNode(true);
     cln3.id = newID.concat("-Price");
@@ -40,10 +43,12 @@ function newRow(rowNumber) {
     cell4.appendChild(element);
     check[newID] = "";
   }
-  setTimeout(() => { 
-    subTotal(currentSelected.concat('-Quantity'),0);
-}, 100);
-  
+  setTimeout(() => {
+    var quantityRequired = document.getElementById(currentSelected.concat('-Quantity'));
+    quantityRequired.setAttribute("required", "");
+    subTotal(currentSelected.concat('-Quantity'), 0);
+  }, 100);
+
 }
 function showHint(name, index) {
   var id = "item".concat(index);
@@ -56,43 +61,76 @@ function showHint(name, index) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById(price).value = this.responseText;
+        document.getElementById(price).setAttribute('value', parseInt(this.responseText));
         document.getElementById(price).placeholder = this.responseText;
       }
     };
     xmlhttp.open("GET", "http://localhost/cashier/app/function/gethint.php?q=" + name, true);
     xmlhttp.send();
   }
- 
+
 }
 
-function quantityOnchange(quantitySelected)
-{
+function quantityOnchange(quantitySelected) {
   var Id = quantitySelected.id
   var quantity = 0;
-  setTimeout(()=>{
+  setTimeout(() => {
     quantity = document.getElementById(Id).value;
-  },100)
-  setTimeout(() => { 
-    if(quantity!=NaN){
-    subTotal(Id,parseInt(quantity));
+  }, 100)
+  setTimeout(() => {
+    if (quantity != NaN) {
+      subTotal(Id, parseInt(quantity));
     }
-    else
-    {
-    subTotal(Id,0);
+    else {
+      subTotal(Id, 0);
     }
-}, 100);
+  }, 100);
 }
 
-function subTotal(row,quantity) 
-{
-  var Id = row.slice(0,5);
+function subTotal(row, quantity) {
+  var Id = row.slice(0, 5);
   var cost = document.getElementById(Id.concat("-Price")).placeholder;
-  var subTotal = quantity * parseInt(cost);
+  var subtotal = quantity * parseInt(cost);
   var htmlSubtotal = document.getElementById(Id.concat("-Subtotal"));
-  if(subTotal != NaN){
-  htmlSubtotal.value = subTotal.toString();
-  }else{
-    htmlSubtotal.value = 0
+  if (isNaN(subtotal) != true) {
+    htmlSubtotal.setAttribute('value', subtotal.toString());
+    total();
+  } else {
+    htmlSubtotal.setAttribute('value', 0);
   }
 }
+
+function total() {
+  total_payment = 0;
+  var tes = document.querySelectorAll('[id$="-Subtotal"]');
+  tes = Array.from(tes);
+  tes.forEach(e => {
+    if (e.value == 0 || isNaN(e.value) == true) {
+      total_payment += 0;
+    } else {
+      total_payment += parseInt(e.value);
+    }
+  });
+  var totalPaymentHTML = document.getElementById("totalToPay");
+  totalPaymentHTML.innerHTML = total_payment.toString();
+  document.getElementById("totalTopayInput").setAttribute("value", total_payment.toString());
+  total_payment = 0;
+}
+
+
+// $(document).ready(function() {
+//   $(document).on('submit', '#submit-payment', function() {
+//     $('#formModal').modal('show');
+//     return false;
+//    });
+// });
+
+function giveChange(totalpayment)
+{
+  var pay = parseInt(document.getElementById('payTotal').value);
+  var change = pay-parseInt(totalpayment);
+  document.getElementById("change").placeholder = change.toString();
+  document.getElementById("change").placeholder = change.toString();
+
+}
+

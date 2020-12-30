@@ -19,9 +19,16 @@ class Product_model {
 
     public function getProductByName($name)
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE P_name=:id');
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE P_name=:name_product');
 
-        $this->db->bind('id',$name);
+        $this->db->bind('name_product',$name);
+        return $this->db->single();
+    }
+
+    public function getProductById($id)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE P_name=:id_product');
+        $this->db->bind('id_product',$id);
         return $this->db->single();
     }
 
