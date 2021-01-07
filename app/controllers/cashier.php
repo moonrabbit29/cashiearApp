@@ -1,6 +1,6 @@
 <?php
 
-class Cashier extends Controller 
+class Cashier extends Controller
 {
 
     private $product;
@@ -9,33 +9,27 @@ class Cashier extends Controller
     public function __construct()
     {
         $this->product = $this->model('Product_model');
-        $this->bil = $this->model('Bill');
+        $this->bill = $this->model('Bill');
         $this->auth = $this->model('User_auth');
     }
-    
-    public function pay()
-    {
-        $data['product'] = $this->model('product_model')->getAllProduct();
-        $data['script'] = "<script type='text/javascript'>
-        $(document).ready(function(){
-            $('#formModal').modal('show');
-        });</script>";
-        $this->view('templates/cashier/header');
-        $this->view('cashier/index',$data);
-        $this->view('templates/cashier/footer',$data);
-    }   
 
-     public function createBill()
-    {
-        if($this->auth->isLogin())
-        {
-            if(isset($_POST['payment_success']))
-            {
-                $data = $this->bil-> createBill($_SESSION['staff_id'],$_POST['totalToPay']);
-                
 
-            }  
-        }else{
+    public function createBill()
+    {
+        if ($this->auth->isLogin()) {
+            if (isset($_POST['payment_success'])) {
+                $id = $this->bill->createBill($_SESSION['staff_id'], $_POST['totalToPay']);
+                $succes = $this->bill->billDetail($id, $_POST['rowCount']);
+                if ($succes != []) {
+                    if ($this->product->editDataproduct([], "P_name") > 0) {
+                        $data['product'] = $this->model('product_model')->getAllProduct();
+                        header("Location: ".BASEURL."public/cashier");
+                    }
+                } else {
+                    echo "failed";
+                }
+            }
+        } else {
             header('Location: ' . BASEURL . 'public/login');
         }
     }
@@ -43,9 +37,9 @@ class Cashier extends Controller
 
     public function index()
     {
-        $data['product'] = $this->model('product_model')->getAllProduct();
+        $data['product'] = $this->product->getAllProduct();
         $this->view('templates/cashier/header');
-        $this->view('cashier/index',$data);
+        $this->view('cashier/index', $data);
         $this->view('templates/cashier/footer');
     }
 

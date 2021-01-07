@@ -34,9 +34,9 @@
             <img src="<?=BASEURL?>public/img/cashier.png" class="profile_image" alt="">
             <h4>Jessica</h4>
         </center>
-        <a href="#"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+        <a href="<?=BASEURL?>public/home"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
         <a href="<?=BASEURL?>public/cashier"><i class="fas fa-table"></i><span>Payment</span></a>
-        <a href="#"><i class="fas fa-th"></i><span>History</span></a>
+        <a href="<?=BASEURL?>public/history"><i class="fas fa-th"></i><span>History</span></a>
         <a href="<?= BASEURL?>public/inventory"><i class="fa fa-dropbox"></i><span>Inventory</span></a>
         <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
         <!-- <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a> -->

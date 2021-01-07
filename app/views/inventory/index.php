@@ -57,6 +57,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                
                 <form action="<?= BASEURL; ?>public/inventory/tambah" method="post">
                     <div class="modal-body">
                         <div class="form-group">

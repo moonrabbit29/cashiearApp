@@ -16,6 +16,7 @@ function newRow(rowNumber) {
     row.setAttribute('id', (parseInt(Id) + 1).toString());
     var selection = document.getElementById(rowNumber.id);
     var cln = selection.cloneNode(true);
+    cln.name = newID.concat("-name");
     cln.id = newID;
     var quantity = document.getElementById(rowNumber.id.concat("-Quantity"));
     var cln2 = quantity.cloneNode(true);
@@ -71,6 +72,8 @@ function showHint(name, index) {
 
 }
 
+
+
 function quantityOnchange(quantitySelected) {
   var Id = quantitySelected.id
   var quantity = 0;
@@ -80,11 +83,13 @@ function quantityOnchange(quantitySelected) {
   setTimeout(() => {
     if (quantity != NaN) {
       subTotal(Id, parseInt(quantity));
+      giveChange($("#totalTopayInput").val())
     }
     else {
       subTotal(Id, 0);
     }
   }, 100);
+
 }
 
 function subTotal(row, quantity) {
@@ -117,20 +122,26 @@ function total() {
   total_payment = 0;
 }
 
+//  $(document).ready(function() {
+//  $(document).on('submit', '#submit-payment', function() {
 
-// $(document).ready(function() {
-//   $(document).on('submit', '#submit-payment', function() {
-//     $('#formModal').modal('show');
-//     return false;
-//    });
-// });
+  
+//   // $('#formModal').modal('show');
+//   //    return false;
+//   //   });
+//  });
+
 
 function giveChange(totalpayment)
 {
-  var pay = parseInt(document.getElementById('payTotal').value);
-  var change = pay-parseInt(totalpayment);
+  console.log(totalpayment.value)
+  var pay = parseInt(document.getElementById('totalTopayInput').value);
+  var change = parseInt(totalpayment.value)-pay;
+  console.log(pay);
+  console.log(change);
   document.getElementById("change").placeholder = change.toString();
   document.getElementById("change").placeholder = change.toString();
-
 }
+
+
 

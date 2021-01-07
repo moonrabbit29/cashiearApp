@@ -30,9 +30,11 @@ class User_auth {
             if($this->db->single())
             {
                 $_SESSION['priviledge'] = 'Manager';
+                $_SESSION['id'] = $result['Id'];
             }else
             {
                 $_SESSION['priviledge'] = 'Cashier';
+                $_SESSION['id'] = $result['Id'];
             }
             return 1;
         }
