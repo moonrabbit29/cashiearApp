@@ -4,15 +4,6 @@
       <h2>Cashier App</h2>
     </a>
     <ul class="navbar-nav mr-auto">
-
-      <li class="nav-item active">
-        <a class="nav-link" href="login">Login</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="regist">Registrasi</a>
-      </li>
-    </ul>
-
   </nav>
 
   <form id="form-container" method="post" action="<?= BASEURL?>public/login/validate">

@@ -69,12 +69,35 @@ class Product_model {
                 $quantity = $string."{$i}"."-"."quantity";
                 $quantityValue = $this->getProductByName($_POST[$name])["P_stock"];
                 $quantity = $quantityValue - intval($_POST[$quantity]);
-                $query.="P_stock = '$quantity'";
+                $name = $_POST[$name];
+                $query.="P_stock = '$quantity' WHERE P_name = '$name'";
                 $this->db->query($query);
                 $this->db->execute();
                 return $this->db->rowCount();
             }
+        }else if($condition = 'id')
+        {
+            $P_name = $_POST['P_name'];
+            $P_mfdate = $_POST['P_mfdate'];
+            $P_expdate = $_POST['P_expdate'];
+            $P_price = $_POST['P_expdate'];
+            $P_suplier = $_POST['P_suplier'];
+            $P_sell = $_POST['P_sell'];
+            $P_stock = $_POST['P_stock'];
+            $query.="P_name='$P_name',P_mfdate='$P_mfdate',P_expdate='$P_expdate',P_price='$P_price'
+                     ,P_suplier='$P_suplier',P_stock='$P_stock' WHERE P_Id='$data'";
+            $this->db->query($query);
+            $this->db->execute();
+            return $this->db->rowCount();
         }
         
+    }
+
+    public function deleteDataProduct($id)
+    {
+        $query="DELETE FROM ". $this->table ." WHERE P_id = '$id'";
+        $this->db->query($query);
+        $this->db->execute();
+        return $this->db->rowCount();
     }
 }

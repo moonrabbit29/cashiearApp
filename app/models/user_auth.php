@@ -24,9 +24,10 @@ class User_auth {
         {
             $_SESSION['status'] = 'login';
             $_SESSION['staff_id'] = $result['Id'];
-            $_SESSION['nama'];
-            $id = $result['id'];
+            //$_SESSION['nama'];
+            $id = $result['Id'];
             $this->db->query("SELECT * FROM manager WHERE Id ='$id' ");
+            $tes = $this->db->single();
             if($this->db->single())
             {
                 $_SESSION['priviledge'] = 'Manager';

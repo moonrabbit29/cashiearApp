@@ -1,5 +1,5 @@
 <div class="content">
-    <form id="submit-payment" method="post" action="<?= BASEURL ?>/public/cashier/createbill">
+    <form id="submit-payment" method="post" action="<?= BASEURL ?>public/cashier/createbill">
         <table id="myTable" class="table table-bordered">
             <thead>
                 <tr class="">

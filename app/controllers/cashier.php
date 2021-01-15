@@ -22,8 +22,9 @@ class Cashier extends Controller
                 $succes = $this->bill->billDetail($id, $_POST['rowCount']);
                 if ($succes != []) {
                     if ($this->product->editDataproduct([], "P_name") > 0) {
-                        $data['product'] = $this->model('product_model')->getAllProduct();
                         header("Location: ".BASEURL."public/cashier");
+                    }else{
+                        echo "failed";
                     }
                 } else {
                     echo "failed";

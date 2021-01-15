@@ -38,7 +38,6 @@ class Bill
             $quantityValue = $_POST[$quantity];
             $name = $string."{$i}"."-"."name";
             $nameValue = $_POST[$name];
-            echo $nameValue;
             $subtotal = $string."{$i}"."-"."Subtotal";
             $subtotalValue = $_POST[$subtotal];
             $valuesArr[] = "('$bill_id','$quantityValue','$subtotalValue','$nameValue')";
@@ -47,7 +46,7 @@ class Bill
         $query.=implode(',',$valuesArr);
         $this->db->query($query);
         $this->db->execute();
-        if($this->db->rowCount())
+        if($this->db->rowCount()>0)
         return $valuesArr;
         else 
         return [];

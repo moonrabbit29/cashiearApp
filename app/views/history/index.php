@@ -4,7 +4,9 @@
             <tr>
                 <th style="width: 10%;">No</th>
                 <th style="width: 25%; ">Bill ID</th>
-                <th style="width: 30% ">Bill Dates</th>
+                <form>
+                <th style="width: 30% ">Date<i type="button" class="fas fa-sort text-right" style="margin-left:250px;" onclick=""></th>
+                </form>
                 <th style="width: 20%">Jumlah</th>
                 <th style="width: 15%;">Action </th>
             </tr>
@@ -41,9 +43,25 @@
                 </div>
 
                 <div class="modal-body">
-                    
+
                 </div>
             </div>
         </div>
     </div>
+
+    
 </div>
+
+
+
+
+
+
+<?php
+function sortArrayByDate($array)
+{
+    usort($array, function ($a, $b) {
+        return ($a['date'] < $b['date']) ? -1 : 1;
+    });
+}
+?>
