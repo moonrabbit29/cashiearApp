@@ -40,7 +40,7 @@
                     <td>
                         <p id="totalToPay"></p>
                         <input id="totalTopayInput" name="totalToPay" type="hidden" value="0">
-                        <input type="hidden" name="rowCount" value="1"></input>
+                        <input type="hidden" id="rowCount" name="rowCount" value="1"></input>
                     </td>
                     </td>
                 </tr>

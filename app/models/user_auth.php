@@ -28,12 +28,15 @@ class User_auth {
             $id = $result['Id'];
             $this->db->query("SELECT * FROM manager WHERE Id ='$id' ");
             $tes = $this->db->single();
-            if($this->db->single())
+            if($tes)
             {
+                $_SESSION['name'] = $tes['M_name'];
                 $_SESSION['priviledge'] = 'Manager';
                 $_SESSION['id'] = $result['Id'];
             }else
             {
+                $this->db->query("SELECT * FROM cashier WHERE Id ='$id' ");
+                $_SESSION['name'] = $tes['c_name'];
                 $_SESSION['priviledge'] = 'Cashier';
                 $_SESSION['id'] = $result['Id'];
             }

@@ -22,14 +22,14 @@ class Product_model {
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE P_name=:name_product');
 
         $this->db->bind('name_product',$name);
-        return $this->db->single();
+        return $this->db->resultSet();
     }
 
     public function getProductById($id)
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE P_name=:id_product');
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE P_Id=:id_product');
         $this->db->bind('id_product',$id);
-        return $this->db->single();
+        return $this->db->resultSet();
     }
 
     public function tambahDataProduct($data)

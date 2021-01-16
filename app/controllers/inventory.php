@@ -27,42 +27,61 @@ class Inventory extends Controller
                 if ($this->product->tambahDataProduct($_POST) > 0) {
                     header('Location: ' . BASEURL . 'public/inventory');
                 }
-            }else{
+            } else {
                 //flash message
                 header('Location: ' . BASEURL . 'public/inventory');
             }
         }
     }
-    
+
     public function Delete($id)
     {
-        if($this->user->isManager())
-        {
-            if($this->product->editDataProduct($id,'id')>0)
-            {
+        if ($this->user->isManager()) {
+            if ($this->product->deleteDataProduct($id, 'id') > 0) {
                 header('Location: ' . BASEURL . 'public/inventory');
+            } else {
+                echo "failed";
             }
-        }else
-        {
+        } else {
             echo 'failed';
         }
     }
 
     public function Edit($id)
     {
-        if($this->user->isManager())
-        {
-            if($this->product->($id,'id')>0)
-            {
+        if ($this->user->isManager()) {
+            if ($this->product->editDataProduct($id, 'id') > 0) {
                 header('Location: ' . BASEURL . 'public/inventory');
-            }else
-            {
+            } else {
                 //flassh message faile edit
             }
-        }else
-        {
+        } else {
             //flash message not manager
             echo 'failed';
+        }
+    }
+
+    public function search()
+    {
+        $byname = $this->product->getProductByName($_POST['searchProduct']);
+        $byid = $this->product->getProductById((int)($_POST['searchProduct']));
+        if ($byname) 
+        {
+            $data['title'] = 'Inventory';
+            $data['inventory'] = $byname;
+            $this->view('templates/cashier/header', $data);
+            $this->view('inventory/index', $data);
+            $this->view('templates/cashier/footer');
+        }else if($byid)
+        {
+            $data['title'] = 'Inventory';
+            $data['inventory'] = $byid;
+            $this->view('templates/cashier/header', $data);
+            $this->view('inventory/index', $data);
+            $this->view('templates/cashier/footer');
+        }else
+        {
+            echo "failed";
         }
     }
 }

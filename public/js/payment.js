@@ -7,7 +7,7 @@ function newRow(rowNumber) {
   var index = table.rows.length - 1;
   var currentSelected = "item".concat((parseInt(Id)).toString());
   var productName = document.getElementById(currentSelected).value;
-
+  document.getElementById('rowCount').setAttribute('value',parseInt(Id));
   showHint(productName, Id);
   if (check[currentSelected] == "") {
     check[currentSelected] = "1";
@@ -21,7 +21,7 @@ function newRow(rowNumber) {
     var quantity = document.getElementById(rowNumber.id.concat("-Quantity"));
     var cln2 = quantity.cloneNode(true);
     cln2.id = newID.concat("-Quantity");
-    cln2.name = newID.concat("-Quantity");
+    cln2.name = newID.concat("-quantity");
     cln2.removeAttribute("required");
     var cost = document.getElementById(rowNumber.id.concat("-Price"));
     var cln3 = cost.cloneNode(true);

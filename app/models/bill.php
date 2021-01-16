@@ -36,6 +36,7 @@ class Bill
         {
             $quantity = $string."{$i}"."-"."quantity";
             $quantityValue = $_POST[$quantity];
+            echo $quantityValue;
             $name = $string."{$i}"."-"."name";
             $nameValue = $_POST[$name];
             $subtotal = $string."{$i}"."-"."Subtotal";
@@ -54,16 +55,39 @@ class Bill
 
     public function getAllBill()
     {
-        $query = "SELECT receipt.bill_id,receipt.bill_date,receipt.id,
-                    receipt.amount,receipdetail.P_name,receipdetail.jumlah,
-                    receipdetail.subtotal FROM receipt INNER JOIN receipdetail ON receipt.bill_id=receipdetail.bill_id";
+        $query = "SELECT * FROM receipt";
         $this->db->query($query);
-        return $this->db->resultSet();
+        $data['bill'] = $this->db->resultSet();
+        $arrayForBillDetail = array();
+        foreach ($data['bill'] as $bill){
+            $arrayForBillDetail[] = "bill_id='$bill[bill_Id]'";
+        }
+        $query = "SELECT * FROM receipdetail WHERE ";
+        $query.=implode('OR ',$arrayForBillDetail);
+        $this->db->query($query);
+        $data['billDetail'] = $this->db->resultSet();
+        return $data;
     }
 
     public function getAllBillByCashierId($id)
     {
         $query = "SELECT * FROM receipt WHERE Id = '$id'";
+        $this->db->query($query);
+        $data['bill'] = $this->db->resultSet();
+        $arrayForBillDetail = array();
+        foreach ($data['bill'] as $bill){
+            $arrayForBillDetail[] = "bill_id='$bill[bill_Id]'";
+        }
+        $query = "SELECT * FROM receipdetail WHERE ";
+        $query.=implode('OR ',$arrayForBillDetail);
+        $this->db->query($query);
+        $data['billDetail'] = $this->db->resultSet();
+        return $data;
+    }
+
+    public function getBillById($id)
+    {
+        $query = "SELECT * FROM receipt WHERE bill_Id = '$id'";
         $this->db->query($query);
         $data['bill'] = $this->db->resultSet();
         $arrayForBillDetail = array();

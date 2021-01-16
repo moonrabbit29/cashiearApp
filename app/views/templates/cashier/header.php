@@ -32,7 +32,8 @@
     <div class="sidebar">
         <center>
             <img src="<?=BASEURL?>public/img/cashier.png" class="profile_image" alt="">
-            <h4>Jessica</h4>
+            <h4><?=$_SESSION['name'] ?></h4>
+            <h6>(<?=$_SESSION['priviledge'] ?>)</h6>
         </center>
         <a href="<?=BASEURL?>public/home"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
         <a href="<?=BASEURL?>public/cashier"><i class="fas fa-table"></i><span>Payment</span></a>
