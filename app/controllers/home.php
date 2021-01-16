@@ -22,7 +22,7 @@ class Home extends Controller {
             }
             $data['title'] = 'cashier';
             $this->view('templates/cashier/header',$data);
-            $this->view('home/index');
+            $this->view('home/cashier');
             $this->view('templates/cashier/footer');
         }
         else{
