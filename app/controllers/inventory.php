@@ -63,7 +63,7 @@ class Inventory extends Controller
 
     public function search()
     {
-        $byname = $this->product->getProductByName($_POST['searchProduct']);
+        $byname = $this->product->getProductByName($_POST['searchProduct'],"not cashier");
         $byid = $this->product->getProductById((int)($_POST['searchProduct']));
         if ($byname) 
         {

@@ -8,16 +8,17 @@
 
     <!-- modal for date select -->
     <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="dateModalLabel">Pilih rentang tanggal</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="<?= BASEURL ?>public/history/getBillByDate" method="post">
+        <form action="<?= BASEURL ?>public/history/getBillByDate" method="post">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="dateModalLabel">Pilih rentang tanggal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
                         <div class="form-group">
                             <label for="sdate" style="margin-right: 87px;">StartDate</label>
                             <label for="edate">EndDate</label>
@@ -27,10 +28,13 @@
                             <input id="edate" type="date" name="EndDate" require>
                         </div>
 
-                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="Submit" class="btn btn-primary"> Submit</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <nav class="navbar navbar-light bg-light">
         <form class="form-inline" method="POST" action="<?= BASEURL ?>public/history/search">

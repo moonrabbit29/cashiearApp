@@ -17,12 +17,18 @@ class Product_model {
         return $this->db->resultSet();
     }
 
-    public function getProductByName($name)
+    public function getProductByName($name,$mode)
     {
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE P_name=:name_product');
 
         $this->db->bind('name_product',$name);
-        return $this->db->resultSet();
+        if ($mode == "cashier"){
+            return $this->db->single();
+        }else
+        {
+            return $this->db->resultSet();
+        }
+        
     }
 
     public function getProductById($id)
@@ -67,7 +73,7 @@ class Product_model {
             for($i=1;$i<=$_POST['rowCount'];$i++){
                 $name = $string."{$i}"."-"."name";
                 $quantity = $string."{$i}"."-"."quantity";
-                $quantityValue = $this->getProductByName($_POST[$name])["P_stock"];
+                $quantityValue = $this->getProductByName($_POST[$name],"cashier")["P_stock"];
                 $quantity = $quantityValue - intval($_POST[$quantity]);
                 $name = $_POST[$name];
                 $query.="P_stock = '$quantity' WHERE P_name = '$name'";

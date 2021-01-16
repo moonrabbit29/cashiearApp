@@ -59,5 +59,15 @@ class History extends Controller
     public function getBillByDate()
     {
         $data['bill'] = $this->bill->getBillByDateRange();
+        if($data)
+        {
+            $this->view('templates/cashier/header');
+            $this->view('history/index', $data);
+            $this->view('templates/cashier/footer');  
+        }else
+        {
+            //flash message
+            echo "failed";
+        }
     }
 }
