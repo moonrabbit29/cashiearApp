@@ -9,15 +9,26 @@ class History extends Controller
         $this->bill = $this->model('Bill');
     }
 
-    public function index()
+    public function index($page="null")
     {
+
+        $batas = 4;
+        $halaman = $page!='null' ? (int)$page : 1;
+        $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
+        $data['title'] = 'Inventory';
+        $data['halaman'] = $halaman;
+        $data['halaman_awal'] = $halaman_awal;
+
         if($_SESSION['priviledge'] == 'Manager')
         {
-            $data['bill'] = $this->bill->getAllBill();
+            $result = $this->bill->getAllBill('awal','akhir');
+            $data['bill'] = $this->bill->getAllBill($halaman_awal,$batas);
         }else
         {
-            $data['bill'] = $this->bill->getAllBillByCashierId($_SESSION['id']);
+            $result = $this->bill->getAllBillByCashierId($_SESSION['id'],'awal','akhir');
+            $data['bill'] = $this->bill->getAllBillByCashierId($_SESSION['id'],$halaman_awal,$batas);
         }
+        $data['dataRange'] = count($result['bill']);
         $this->data = $data;
         $this->view('templates/cashier/header');
         $this->view('history/index', $data);

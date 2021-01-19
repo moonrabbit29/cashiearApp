@@ -11,8 +11,11 @@ class Product_model {
         $this->db = new Database;
     }
 
-    public function getAllProduct()
+    public function getAllProduct($limita , $limitb)
     {
+        if($limita !='awal'  and $limitb !='akhir')
+        $this->db->query('SELECT * FROM ' . $this->table. " limit $limita,$limitb");
+        else
         $this->db->query('SELECT * FROM ' . $this->table);
         return $this->db->resultSet();
     }

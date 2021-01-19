@@ -11,10 +11,17 @@ class Inventory extends Controller
         $this->product = $this->model('product_model');
     }
 
-    public function Index()
+    public function Index($page="null")
     {
+        $result = $this->product->getAllProduct('awal','akhir');
+        $batas = 4;
+        $halaman = $page!='null' ? (int)$page : 1;
+        $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
         $data['title'] = 'Inventory';
-        $data['inventory'] = $this->product->getAllProduct();
+        $data['halaman'] = $halaman;
+        $data['halaman_awal'] = $halaman_awal;
+        $data['inventory'] = $this->product->getAllProduct($halaman_awal,$batas);
+        $data['dataRange'] = count($result);
         $this->view('templates/cashier/header', $data);
         $this->view('inventory/index', $data);
         $this->view('templates/cashier/footer');
@@ -63,24 +70,21 @@ class Inventory extends Controller
 
     public function search()
     {
-        $byname = $this->product->getProductByName($_POST['searchProduct'],"not cashier");
+        $byname = $this->product->getProductByName($_POST['searchProduct'], "not cashier");
         $byid = $this->product->getProductById((int)($_POST['searchProduct']));
-        if ($byname) 
-        {
+        if ($byname) {
             $data['title'] = 'Inventory';
             $data['inventory'] = $byname;
             $this->view('templates/cashier/header', $data);
             $this->view('inventory/index', $data);
             $this->view('templates/cashier/footer');
-        }else if($byid)
-        {
+        } else if ($byid) {
             $data['title'] = 'Inventory';
             $data['inventory'] = $byid;
             $this->view('templates/cashier/header', $data);
             $this->view('inventory/index', $data);
             $this->view('templates/cashier/footer');
-        }else
-        {
+        } else {
             echo "failed";
         }
     }

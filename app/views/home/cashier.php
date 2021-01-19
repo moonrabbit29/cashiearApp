@@ -39,11 +39,11 @@
                         </div>
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class=" form-control" id="username" name="username" placeholder="Cashier Name">
+                            <input type="text" class=" form-control" id="username" name="username" placeholder="Cashier username" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="text"  class=" form-control" id="password" name="password" placeholder="Cashier Name">
+                            <input type="text"  class=" form-control" id="password" name="password" placeholder="Cashier password" required>
                         </div>
 
                     </div>

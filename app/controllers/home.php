@@ -15,15 +15,17 @@ class Home extends Controller {
         if(isset($_SESSION['status']) && isset($_SESSION['staff_id']))
         {
             if($_SESSION['priviledge']=='Manager'){
-                $data['title'] = 'cashier';
+                $data['title'] = 'Manager';
                 $this->view('templates/cashier/header',$data);
                 $this->view('home/manager');
                 $this->view('templates/cashier/footer');
             }
+            else{
             $data['title'] = 'cashier';
             $this->view('templates/cashier/header',$data);
             $this->view('home/cashier');
             $this->view('templates/cashier/footer');
+            }
         }
         else{
             header('Location: ' . BASEURL . 'public/login' );
@@ -57,5 +59,10 @@ class Home extends Controller {
         if($result>0){
             header('Location: ' . BASEURL . 'public/home');
         }
+    }
+
+    public function salesReport($awal,$akhir)
+    {
+        
     }
 }

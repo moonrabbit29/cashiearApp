@@ -57,6 +57,12 @@
         <tbody>
             <?php
             $idx = 0;
+            $batas = 4;
+            $halaman = $data['halaman'];
+            $halaman_awal = $data['halaman_awal'];
+            $total_halaman = ceil($data['dataRange'] / $batas);
+            $previous = $halaman - 1;
+            $next = $halaman + 1;
             foreach ($data['bill']['bill'] as $bill) :
                 $idx += 1;
             ?>
@@ -106,6 +112,23 @@
             ?>
         </tbody>
     </table>
+    <nav>
+			<ul class="pagination justify-content-center">
+				<li class="page-item">
+					<a class="page-link" <?php if($halaman > 1){ echo "href=".BASEURL."public/history/index/$previous"; } ?>>Previous</a>
+				</li>
+				<?php 
+				for($x=1;$x<=$total_halaman;$x++){
+					?> 
+					<li class="page-item"><a class="page-link" href="<?php echo BASEURL."public/history/index/$x" ?>"><?php echo $x; ?></a></li>
+					<?php
+				}
+				?>				
+				<li class="page-item">
+					<a  class="page-link" <?php if($halaman < $total_halaman) { echo "href=".BASEURL."public/history/index/$next"; } ?>>Next</a>
+				</li>
+			</ul>
+		</nav>
 
 
 

@@ -13,9 +13,10 @@ class Bill
 
     public function createBill($id, $amount)
     {
+        echo $id;
         $amount = floatval($amount);
         $bill_date = date("Y-m-d");
-        $query = "INSERT INTO " . $this->table . " VALUES('','$bill_date','$id','$amount')";
+        $query = "INSERT INTO " . $this->table . " VALUES('','$bill_date','$amount','$id')";
         $this->db->query($query);
         $result = $this->db->execute();
         return $result;
@@ -52,8 +53,11 @@ class Bill
             return [];
     }
 
-    public function getAllBill()
+    public function getAllBill($limita,$limitb)
     {
+        if($limita!='awal' && $limitb!='akhir')
+        $query = "SELECT * FROM receipt limit $limita,$limitb";
+        else
         $query = "SELECT * FROM receipt";
         $this->db->query($query);
         $data['bill'] = $this->db->resultSet();
@@ -73,8 +77,11 @@ class Bill
         }
     }
 
-    public function getAllBillByCashierId($id)
+    public function getAllBillByCashierId($id,$limita,$limitb)
     {
+        if($limita!='awal' && $limitb!='akhir')
+        $query = "SELECT * FROM receipt WHERE Id ='$id' limit $limita,$limitb";
+        else
         $query = "SELECT * FROM receipt WHERE Id ='$id'";
         $this->db->query($query);
         $data['bill'] = $this->db->resultSet();

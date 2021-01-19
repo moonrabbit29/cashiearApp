@@ -38,7 +38,7 @@ class Cashier extends Controller
 
     public function index()
     {
-        $data['product'] = $this->product->getAllProduct();
+        $data['product'] = $this->product->getAllProduct('awal','akhir');
         $this->view('templates/cashier/header');
         $this->view('cashier/index', $data);
         $this->view('templates/cashier/footer');

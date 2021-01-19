@@ -69,9 +69,9 @@ class User_auth
         $this->db->query($query);
         $this->db->bind('username', $_POST['username']);
         $this->db->bind('password', $_POST['password']);
-        $this->db->execute();
+        $Id = $this->db->execute();
         if ($this->db->rowCount() > 0) {
-            $query = "INSERT INTO cashier (c_name,C_address) VALUES(:name,:address)";
+            $query = "INSERT INTO cashier (Id,c_name,C_address) VALUES('$Id',:name,:address)";
             $this->db->query($query);
             $this->db->bind('name', $_POST['c_name']);
             $this->db->bind('address', $_POST['c_address']);
@@ -86,14 +86,16 @@ class User_auth
         $this->db->query($query);
         $this->db->bind('username', $_POST['username']);
         $this->db->bind('password', $_POST['password']);
-        $this->db->execute();
-        if ($this->db->rowCount() > 0) {
+        if ($this->db->execute()!=null) {
             if ($id == 1)
-                $query = "UPDATE manager M_address=:address,M_name=:name";
-            else
-                $query = "UPDATE manager C_address=:address,c_name=:name";
-
-            $this->db->query($query);
+            {
+                $query = "UPDATE manager SET M_address=:address,M_name=:name WHERE id='$id'";
+                $this->db->query($query);
+            }
+            else{
+                $query = "UPDATE cashier SET C_address=:address,c_name=:name WHERE id='$id'";
+                $this->db->query($query);
+            }
             $this->db->bind('address', $_POST['M_address']);
             $this->db->bind('name', $_POST['M_name']);
             $this->db->execute();
