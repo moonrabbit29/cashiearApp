@@ -53,12 +53,12 @@ class Bill
             return [];
     }
 
-    public function getAllBill($limita,$limitb)
+    public function getAllBill($limita, $limitb)
     {
-        if($limita!='awal' && $limitb!='akhir')
-        $query = "SELECT * FROM receipt limit $limita,$limitb";
+        if ($limita != 'awal' && $limitb != 'akhir')
+            $query = "SELECT * FROM receipt limit $limita,$limitb";
         else
-        $query = "SELECT * FROM receipt";
+            $query = "SELECT * FROM receipt";
         $this->db->query($query);
         $data['bill'] = $this->db->resultSet();
         if ($data['bill']) {
@@ -77,12 +77,12 @@ class Bill
         }
     }
 
-    public function getAllBillByCashierId($id,$limita,$limitb)
+    public function getAllBillByCashierId($id, $limita, $limitb)
     {
-        if($limita!='awal' && $limitb!='akhir')
-        $query = "SELECT * FROM receipt WHERE Id ='$id' limit $limita,$limitb";
+        if ($limita != 'awal' && $limitb != 'akhir')
+            $query = "SELECT * FROM receipt WHERE Id ='$id' limit $limita,$limitb";
         else
-        $query = "SELECT * FROM receipt WHERE Id ='$id'";
+            $query = "SELECT * FROM receipt WHERE Id ='$id'";
         $this->db->query($query);
         $data['bill'] = $this->db->resultSet();
         if ($data['bill']) {
@@ -137,5 +137,33 @@ class Bill
         $this->db->query($query);
         $data['billDetail'] = $this->db->resultSet();
         return $data;
+    }
+
+    function salesReport($data)
+    {
+        $awal = new DateTime($_POST['StartDate']);
+        $akhir = new DateTime($_POST['EndDate']);
+        $currentDate = $awal;
+        $returnData['date'] = array();
+        $returnData['total'] = 0;
+        $total = 0;
+        $interval = DateInterval::createFromDateString('1 day');
+        $period = new DatePeriod($awal, $interval, $akhir);
+        $idx = 0;
+        foreach ($period as $dt) {
+            foreach ($data['bill'] as $d) {
+                if ($d['bill_date'] == $dt->format('Y-m-d')) {
+                    $total += $d['amount'];
+                }
+            }
+            if($total!=0){
+                $returnData['date'][$idx]['date'] = $dt->format('Y-m-d');
+                $returnData['date'][$idx]['nominal'] = $total;
+                $idx+=1;
+            }  
+            $returnData['total'] += $total;
+            $total = 0;
+        }
+        return $returnData;
     }
 }

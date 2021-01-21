@@ -36,6 +36,7 @@
             </div>
         </form>
     </div>
+    
     <nav class="navbar navbar-light bg-light">
         <form class="form-inline" method="POST" action="<?= BASEURL ?>public/history/search">
             <input name="BillSearch" class="form-control mr-sm-2" type="search" placeholder="Search by Bill ID" aria-label="Search">

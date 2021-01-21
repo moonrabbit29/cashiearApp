@@ -70,6 +70,15 @@ class Inventory extends Controller
 
     public function search()
     {
+        $result = $this->product->getAllProduct('awal','akhir');
+        $batas = 4;
+        $halaman = 1;
+        $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
+        $data['title'] = 'Inventory';
+        $data['halaman'] = $halaman;
+        $data['halaman_awal'] = $halaman_awal;
+        $data['inventory'] = $this->product->getAllProduct($halaman_awal,$batas);
+        $data['dataRange'] = count($result);
         $byname = $this->product->getProductByName($_POST['searchProduct'], "not cashier");
         $byid = $this->product->getProductById((int)($_POST['searchProduct']));
         if ($byname) {

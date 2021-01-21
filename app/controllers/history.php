@@ -54,7 +54,14 @@ class History extends Controller
 
     public function search()
     {
+        $batas = 4;
+        $halaman =1;
+        $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
+        $data['title'] = 'Inventory';
+        $data['halaman'] = $halaman;
+        $data['halaman_awal'] = $halaman_awal;
         $data['bill'] =$this->bill->getBillById($_POST['BillSearch']);
+        $data['dataRange'] = count($data['bill']['bill']);
         if($data)
         {
             $this->view('templates/cashier/header');
@@ -69,7 +76,14 @@ class History extends Controller
 
     public function getBillByDate()
     {
+        $batas = 4;
+        $halaman =  1;
+        $halaman_awal = ($halaman > 1) ? ($halaman * $batas) - $batas : 0;
+        $data['title'] = 'Inventory';
+        $data['halaman'] = $halaman;
+        $data['halaman_awal'] = $halaman_awal;
         $data['bill'] = $this->bill->getBillByDateRange();
+        $data['dataRange'] = count($data['bill']);
         if($data)
         {
             $this->view('templates/cashier/header');

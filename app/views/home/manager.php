@@ -52,6 +52,37 @@
         </div>
     </div>
 
+<!-- modal for sales report --> 
+    <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel" aria-hidden="true">
+        <form action="<?= BASEURL ?>public/home/salesreport" method="post">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="dateModalLabel">Pilih rentang tanggal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="sdate" style="margin-right: 87px;">StartDate</label>
+                            <label for="edate">EndDate</label>
+                        </div>
+                        <div class="form-group">
+                            <input id="sdate" type="date" name="StartDate" require>
+                            <input id="edate" type="date" name="EndDate" require>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="Submit" class="btn btn-primary"> Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
 
     <div class="card" style="width: 18rem; float:left;  
                 width:30%; 
@@ -63,7 +94,7 @@
         <div class="card-body">
             <h5 class="card-title">Laporan Keuangan</h5>
             <p class="card-text">Lihat laporan keuangan perminggu/perbulan/pertahun</p>
-            <a href="#" class="btn btn-primary">Buka Laporan</a>
+            <btn data-toggle="modal" data-target="#dateModal" class="btn btn-primary">Buka Laporan</btn>
         </div>
     </div>
 
@@ -102,11 +133,11 @@
                         </div>
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class=" form-control" id="username" name="username" placeholder="Cashier Name">
+                            <input require type="text" class=" form-control" id="username" name="username" placeholder="Cashier Name">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="text"  class=" form-control" id="password" name="password" placeholder="Cashier Name">
+                            <input require type="text"  class=" form-control" id="password" name="password" placeholder="Cashier Name">
                         </div>
 
                     </div>

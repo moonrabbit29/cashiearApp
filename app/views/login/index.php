@@ -1,7 +1,7 @@
 <div id="vue-login">
   <nav class="navbar navbar-expand navbar-dark bg">
     <a class="navbar-brand" href="login.php">
-      <h2>Cashier App</h2>
+      <h2>April Store</h2>
     </a>
     <ul class="navbar-nav mr-auto">
   </nav>
@@ -9,7 +9,7 @@
   <form id="form-container" method="post" action="<?= BASEURL?>public/login/validate">
     <div class="form-group">
       <div id="form-title">
-        <h1 class="form-title"><?= $data['title']?></h1>
+        <h1 class="form-title">Login</h1>
       </div>
       <td class="row">
         <div class="col-md-4">

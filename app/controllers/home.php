@@ -3,10 +3,12 @@
 class Home extends Controller {
 
     private $user;
+    private $bill;
     
     public function __construct()
     {
         $this->user = $this->model('user_auth');
+        $this->bill = $this->model('Bill');
     }
     
     public function index()
@@ -61,8 +63,20 @@ class Home extends Controller {
         }
     }
 
-    public function salesReport($awal,$akhir)
+    public function salesReport()
     {
-        
+        if(isset($_POST['StartDate'])&&isset($_POST['EndDate'])&&
+        $_SESSION['priviledge']=='Manager')
+        {
+        $dataResult= $this->bill->getBillByDateRange();
+        $data['bill'] = $this->bill->salesReport($dataResult);
+        $data['title'] = 'cashier';
+        $this->view('templates/cashier/header',$data);
+        $this->view('home/salesReport',$data);
+        $this->view('templates/cashier/footer');
+        }else
+        {
+            header('Location: ' . BASEURL . 'public/home');
+        }
     }
 }
